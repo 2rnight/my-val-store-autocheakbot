@@ -1,0 +1,58 @@
+name: 掌上无畏契约每日商店推送
+
+on:
+  schedule:
+    # 每天北京时间早上 8:05 自动执行 (UTC 时间 00:05)
+    - cron: '5 0 * * *'
+  workflow_dispatch: # 支持在 GitHub 页面上手动点击按钮立即运行测试
+
+jobs:
+  check-shop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 安装依赖库
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # -------------------------------------------------------------
+      # 核心持久化步骤 1：从 GitHub Cache 中恢复上一次运行保存的 Cookie 缓存
+      # -------------------------------------------------------------
+      - name: 恢复 Cookie 持久化缓存
+        uses: actions/cache/restore@v4
+        with:
+          path: config
+          key: valorant-tokens-${{ github.run_id }}
+          restore-keys: |
+            valorant-tokens-
+
+      # -------------------------------------------------------------
+      # 核心执行步骤：运行主程序（会自动读取 config、刷新并写回 config）
+      # -------------------------------------------------------------
+      - name: 执行商店查询与自动续期
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
+          ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
+        run: |
+          python main.py
+
+      # -------------------------------------------------------------
+      # 核心持久化步骤 2：将本次运行更新后的 config 目录存入 GitHub Cache
+      # -------------------------------------------------------------
+      - name: 保存最新的 Cookie 凭据到缓存
+        uses: actions/cache/save@v4
+        if: always() # 无论脚本是否报错，都尝试保存已刷新的 Token
+        with:
+          path: config
+          key: valorant-tokens-${{ github.run_id }}
