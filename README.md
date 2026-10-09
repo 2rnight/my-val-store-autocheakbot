@@ -1,6 +1,11 @@
 # 掌上无畏契约每日商店推送
-##效果
-图片占位符
+
+每天自动查询《掌上无畏契约》每日商店，并通过微信模板消息推送给你。
+
+## 🎬 效果
+
+<!-- 图片占位：推送效果预览，插入时替换为 ![推送效果预览](images/preview.png) -->
+> 📷 **[图片占位]** 推送效果预览
 
 ## 📋 前置准备
 
@@ -25,19 +30,28 @@
 4. 记录生成的 **模板 ID**
 5. 在 **测试号二维码** 处扫码关注，记录你的微信号（即 `open_id`）
 
+<!-- 图片占位：测试号页面（appID / appSecret 位置），插入时替换为 ![测试号页面](images/sandbox.png) -->
+> 📷 **[图片占位]** 测试号页面（appID / appSecret 位置）
+
+<!-- 图片占位：模板消息配置，插入时替换为 ![模板配置](images/template.png) -->
+> 📷 **[图片占位]** 模板消息配置
+
 ### 2. 抓包获取游戏 Cookie
 
 1. 在手机上安装抓包工具（推荐 Stream (iOS) / HttpCanary (Android)）
 2. 打开 掌上无畏契约 App，登录后查看每日商店
 3. 在抓包工具中找到请求域名 `app.mval.qq.com` 的 `refresh_client_ticket` 请求
-4. 复制该请求的完整 Cookie 请求头，并将 `ct` 拼接在 Cookie 后面，形成如下格式：
+4. 复制该请求的完整 Cookie 请求头，并将 `ct` 拼接在 Cookie 末尾，格式如下：
 
    ```text
-   "cookie" = "clientType=xxx; uin=xxx; appid=xxx; acctype=xx; openid=xxx; access_token=xxx; userId=xxx; accountType=xx; tid=xx; ct=xxx"
+   clientType=xxx; uin=xxx; appid=xxx; acctype=xx; openid=xxx; access_token=xxx; userId=xxx; accountType=xx; tid=xx; ct=xxx
    ```
 
 > [!NOTE]
 > 微信端没有 `uin` 字段。
+
+<!-- 图片占位：抓包请求页面（refresh_client_ticket），插入时替换为 ![抓包请求](images/capture.png) -->
+> 📷 **[图片占位]** 抓包请求页面（refresh_client_ticket）
 
 ## ⚙️ 配置步骤
 
@@ -57,9 +71,12 @@
 | `APP_ID` | `wx1234567890abcdef` | 微信测试号的 appID |
 | `APP_SECRET` | `abcdef1234567890...` | 微信测试号的 appSecret |
 | `TEMPLATE_ID` | `AbCdEfGhIjKlMnOpQrStUvWxYz...` | 微信模板消息的模板 ID |
-| `ACCOUNTS_JSON` | 见下方示例 👇 | 多账号配置（JSON 格式） |
+| `ACCOUNTS_JSON` | 见 [填写 ACCOUNTS_JSON](#3-填写-accounts_json) | 多账号配置（JSON 格式） |
 
-### 3. 填写 `ACCOUNTS_JSON`
+<!-- 图片占位：Secrets 配置页面，插入时替换为 ![Secrets 配置](images/secrets.png) -->
+> 📷 **[图片占位]** Secrets 配置页面
+
+### 3. 填写 ACCOUNTS_JSON
 
 `ACCOUNTS_JSON` 的值是一个 JSON 数组，每个元素代表一个游戏账号：
 
@@ -88,5 +105,12 @@
 | `open_id` | 字符串 | ✅ | 接收推送的微信 `open_id` |
 | `cookie` | 字符串 | ✅ | 抓包获取的完整 Cookie 字符串 |
 | `fav_set` | 数组 | ❌ | 心愿皮肤名称列表，命中时高亮提醒 |
-### 4 测试 
-点击action 点击掌上无畏契约每日商店推送 点击run workflow
+
+<!-- 图片占位：ACCOUNTS_JSON 填写示例，插入时替换为 ![ACCOUNTS_JSON 示例](images/accounts-json.png) -->
+> 📷 **[图片占位]** ACCOUNTS_JSON 填写示例
+
+### 4. 测试
+
+1. 进入仓库的 **Actions** 页面
+2. 点击 **掌上无畏契约每日商店推送** 工作流
+3. 点击 **Run workflow** 手动运行一次，检查微信是否收到推送
