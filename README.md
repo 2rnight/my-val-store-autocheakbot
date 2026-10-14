@@ -1,4 +1,4 @@
-<img width="1220" height="2712" alt="image" src="https://github.com/user-attachments/assets/1c7f1153-21e8-4775-a2e2-d696a4a61c6f" /># 掌上无畏契约每日商店推送
+# 掌上无畏契约每日商店推送
 
 每天自动查询《掌上无畏契约》每日商店，并通过微信模板消息推送给你。
 
