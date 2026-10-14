@@ -4,8 +4,8 @@
 
 ## 🎬 效果
 
-<!-- 图片占位：推送效果预览，插入时替换为 ![推送效果预览](images/preview.png) -->
-> 📷 **[图片占位]** 推送效果预览
+<img width="1220" height="2712" alt="image" src="https://github.com/user-attachments/assets/bc140fad-c270-443e-b223-cad8d3367897" />
+
 
 ## 📋 前置准备
 
