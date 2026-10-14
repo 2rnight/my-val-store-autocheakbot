@@ -4,7 +4,8 @@
 
 ## 🎬 效果
 
-<img width="1220" height="2712" alt="33cf53a78194094dcdef354fd870b52" src="https://github.com/user-attachments/assets/426b8c0d-42d1-4894-a4aa-744c9cba0e75" />
+![Uploading image.png…]()
+
 
 
 ## 📋 前置准备
